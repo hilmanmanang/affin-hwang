@@ -8,6 +8,12 @@ router.get('/', async (req, res) => {
     res.send(await customer.find({}).toArray());
 });
 
+router.get('/:id', async (req, res) => {
+    const customer = await loadCustomerCOllection();
+    res.send(await customer.findOne({_id: new mongodb.ObjectId(req.params.id)}));
+    res.status(200).send();
+})
+
 router.post('/', async (req, res) => {
     const customer = await loadCustomerCOllection();
     await customer.insertOne({
@@ -15,6 +21,16 @@ router.post('/', async (req, res) => {
         age: req.body.age
     })
     res.status(201).send();
+});
+
+router.put('/', async (req, res) => {
+    const body = {
+        name: req.body.name,
+        age: req.body.age
+    }
+    const customer = await loadCustomerCOllection();
+    await customer.updateOne({_id: new mongodb.ObjectId(req.body._id)}, {$set: body} )
+    res.status(200).json({msg: 'updated'});
 });
 
 router.delete('/:id', async (req, res) => {
