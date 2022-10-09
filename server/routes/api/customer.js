@@ -18,7 +18,10 @@ router.post('/', async (req, res) => {
     const customer = await loadCustomerCOllection();
     await customer.insertOne({
         name: req.body.name,
-        age: req.body.age
+        age: req.body.age,
+        gender: req.body.gender,
+        contactNo: req.body.contactNo,
+        email: req.body.email
     })
     res.status(201).send();
 });
@@ -26,7 +29,10 @@ router.post('/', async (req, res) => {
 router.put('/', async (req, res) => {
     const body = {
         name: req.body.name,
-        age: req.body.age
+        age: req.body.age,
+        gender: req.body.gender,
+        contactNo: req.body.contactNo,
+        email: req.body.email
     }
     const customer = await loadCustomerCOllection();
     await customer.updateOne({_id: new mongodb.ObjectId(req.body._id)}, {$set: body} )

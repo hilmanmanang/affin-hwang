@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <!-- <router-link to="/about">Abouta</router-link> -->
-        <router-view></router-view>
-    </div>
+    <v-app>
+        <v-content>
+            <router-view></router-view>
+        </v-content>
+    </v-app>
 </template>
 
 <script>
@@ -10,5 +11,7 @@
 </script>
 
 <style>
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 </style>
